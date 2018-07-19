@@ -3,7 +3,8 @@
 enum class ScratchWork
 {
 	Noop,
-	NumericalLimits
+	NumericalLimits,
+	GenTrees
 };
 
 // Use template specialization to do a compile time switch on which

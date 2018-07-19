@@ -10,7 +10,7 @@ void RunScratch<ScratchWork::Noop>() {}
 
 int main()
 {
-	RunScratch<ScratchWork::NumericalLimits>();
+	RunScratch<ScratchWork::GenTrees>();
 
 #ifdef _WIN32
 	system("pause");

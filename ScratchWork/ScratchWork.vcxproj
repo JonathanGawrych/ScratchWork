@@ -121,12 +121,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GenTrees.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="NumericalLimits.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FloatToUHex.h" />
     <ClInclude Include="ScratchPicker.h" />
+    <ClInclude Include="x64x86IntrinsicShim.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

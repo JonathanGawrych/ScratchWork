@@ -5,3 +5,7 @@ Welcome to my little repository of one-off code. Whenever I get an idea and want
 ## C++/NumericalLimits
 
 Just a simple project that prints out C++ numerical limits for the primitive types
+
+## C++/GenTrees
+
+Based on my own [StackOverflow question](https://stackoverflow.com/q/50261225/1248889) (that never got answered), how would one generate all trees (non-binary) given a number of nodes. Inspiration came a lot from  Peter Luschny's [Permutation Trees](http://www.luschny.de/math/factorial/combi/PermutationTrees.html). I struggled with this one for a while until I derived that the number of trees is equal to the seqence 1, 2, 5, 14, 42... From that I was able to discover [Catalan numbers](https://en.wikipedia.org/wiki/Catalan_number), which greatly aided my understanding of this combinational problem. This led me to [Permutations of Parenthesis - StackOverflow](https://stackoverflow.com/a/3172190/1248889), which formed a basis of my code. After transforming the recursive solution into a stack based one, then changing parenthesis to an encoding of children in a tree of nodes, I was able to finally generate all trees of a given number of nodes.
