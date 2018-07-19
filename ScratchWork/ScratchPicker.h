@@ -4,7 +4,8 @@ enum class ScratchWork
 {
 	Noop,
 	NumericalLimits,
-	GenTrees
+	GenTrees,
+	MSVCArmDebugCompilerCrash
 };
 
 // Use template specialization to do a compile time switch on which
