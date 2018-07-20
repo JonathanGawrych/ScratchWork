@@ -6,7 +6,7 @@ Welcome to my little repository of one-off code. Whenever I get an idea and want
 
 ### NumericalLimits
 
-Just a simple project that prints out C++ numerical limits for the primitive types
+Just a simple project that prints out C++ numerical limits for the primitive types.
 
 ### GenTrees
 
@@ -19,3 +19,7 @@ Minimial repro of a compiler crash that was found in a build loop. This is durin
 > This is a compiler issue with branch shortening: we shorten a branch to use the 2-byte form initially but later discover that it in fact needs a longer encoding. However, the branch wasn't lengthened properly causing the compiler crash when it noticed this inconsistency.
 > Since this occurs in debug mode, working around it involves restructuring the source code so that branches don't need to go past the 2-byte form (1020 bytes apart) which in this case would involve splitting the function into 2. With how the release schedule currently lines up this fix would be in a preview release some time in December and an official release early next year.
 -- <cite>[Modi Mo](https://developercommunity.visualstudio.com/solutions/291627/view.html)</cite>
+
+### CoincidentalLifetimeManagement
+
+A small demo of what I call Coincidental Lifetime Management&trade;. This is when a developer sets up a system that has some smart pointers and some raw pointers. By mixing the two, or worse - introducing race conditions, you can build a fragile framework where slight changes to code might cause everything to crumble. This demonstrates some of those fragile issues.

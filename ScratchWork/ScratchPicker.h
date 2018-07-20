@@ -5,7 +5,8 @@ enum class ScratchWork
 	Noop,
 	NumericalLimits,
 	GenTrees,
-	MSVCArmDebugCompilerCrash
+	MSVCArmDebugCompilerCrash,
+	CoincidentalLifetimeManagement
 };
 
 // Use template specialization to do a compile time switch on which

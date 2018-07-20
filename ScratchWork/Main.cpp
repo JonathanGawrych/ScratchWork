@@ -10,7 +10,7 @@ void RunScratch<ScratchWork::Noop>() {}
 
 int main()
 {
-	RunScratch<ScratchWork::GenTrees>();
+	RunScratch<ScratchWork::CoincidentalLifetimeManagement>();
 
 #ifdef _WIN32
 	system("pause");
