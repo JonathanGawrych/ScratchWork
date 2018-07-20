@@ -10,7 +10,7 @@ void RunScratch<ScratchWork::Noop>() {}
 
 int main()
 {
-	RunScratch<ScratchWork::CoincidentalLifetimeManagement>();
+	RunScratch<ScratchWork::CombinationGrowingNumber>();
 
 #ifdef _WIN32
 	system("pause");

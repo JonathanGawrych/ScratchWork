@@ -27,3 +27,15 @@ A small demo of what I call Coincidental Lifetime Management&trade;. This is whe
 ### CompileTimeArraySplit
 
 Arrays that haven't decade to their pointer type carry their length during compile time. If we wanted to modify that array length, we need to interesting casts in order to do so. This shows off a couple of compile time operations on array, such as shrinking the array by one, or spliting into two parts (with even/odd handling).
+
+### CombinationGrowingNumber
+
+This is slightly related to GenTrees. I wanted all combinations of three different trees, each up to N number of nodes. This is a pretty simple problem (just use 3 nested for loops). However, I wanted to start with all trees of 2 nodes or less, then 3 nodes or less, then 4 nodes or less, but this would redo work. Thus I needed a way to generate combinations of numbers of size N that excludes all combinations of N - 1. A conditional check could do it `if (a != n || b != n || c != n) continue;` could suffice, but then it would be neededlessly counting.
+
+While the overhead might be worse than the continue in some cases, I did want to write an algorithm that could generate the combinations. The number of calls will equal M^N - (M-1)^N, as opposed to M^N. Interstingly some of these are named sequences:
+
+* N = 2 - [A005408](https://oeis.org/A005408): [Gnomic numbers](http://mathworld.wolfram.com/GnomonicNumber.html) (1d): 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, ...
+* N = 3 - [A003215](https://oeis.org/A003215): [Centered hexagonal numbers](http://mathworld.wolfram.com/HexNumber.html) (2d): 1, 7, 19, 37, 61, 91, 127, 169, 217, 271, ...
+* N = 4 - [A005917](https://oeis.org/A005917): [Rhombic dodecahedral numbers](http://mathworld.wolfram.com/RhombicDodecahedralNumber.html) (3d): 1, 15, 65, 175, 369, 671, 1105, 1695, 2465, 3439, ...
+
+All of these are [Nexus Numbers](http://mathworld.wolfram.com/NexusNumber.html) which is a subclass of [Figurate Numbers](http://mathworld.wolfram.com/FigurateNumber.html).

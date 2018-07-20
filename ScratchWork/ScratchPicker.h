@@ -7,7 +7,8 @@ enum class ScratchWork
 	GenTrees,
 	MSVCArmDebugCompilerCrash,
 	CoincidentalLifetimeManagement,
-	CompileTimeArraySplit
+	CompileTimeArraySplit,
+	CombinationGrowingNumber
 };
 
 // Use template specialization to do a compile time switch on which
