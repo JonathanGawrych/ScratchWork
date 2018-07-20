@@ -23,3 +23,7 @@ Minimial repro of a compiler crash that was found in a build loop. This is durin
 ### CoincidentalLifetimeManagement
 
 A small demo of what I call Coincidental Lifetime Management&trade;. This is when a developer sets up a system that has some smart pointers and some raw pointers. By mixing the two, or worse - introducing race conditions, you can build a fragile framework where slight changes to code might cause everything to crumble. This demonstrates some of those fragile issues.
+
+### CompileTimeArraySplit
+
+Arrays that haven't decade to their pointer type carry their length during compile time. If we wanted to modify that array length, we need to interesting casts in order to do so. This shows off a couple of compile time operations on array, such as shrinking the array by one, or spliting into two parts (with even/odd handling).

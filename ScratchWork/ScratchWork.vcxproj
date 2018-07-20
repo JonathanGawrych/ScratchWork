@@ -122,6 +122,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CoincidentalLifetimeManagement.cpp" />
+    <ClCompile Include="CompileTimeArraySplit.cpp" />
     <ClCompile Include="MSVCArmDebugCompilerCrash.cpp" />
     <ClCompile Include="GenTrees.cpp" />
     <ClCompile Include="Main.cpp" />
