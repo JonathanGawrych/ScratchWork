@@ -1,6 +1,7 @@
 #include "ScratchPicker.h"
 #include <iostream>
 #include <vector>
+#include <chrono>
 
 // Will call the lambda with all combinations of 0 to M of N numbers minus
 // all combinations of 0 to M - 1 of N numbers.
@@ -54,7 +55,7 @@ void CombinationGrowing(unsigned char N, unsigned char M, Lambda&& lambda)
 template<>
 void RunScratch<ScratchWork::CombinationGrowingNumber>()
 {
-	for (unsigned char M = 0; M < 5; M++)
+	for (unsigned char M = 0; M <= 3; M++)
 	{
 		std::cout << "Combo " << +M << ":" << std::endl;
 		size_t numCombos = 0;
@@ -69,5 +70,44 @@ void RunScratch<ScratchWork::CombinationGrowingNumber>()
 		});
 		std::cout << "Total: " << numCombos << std::endl;
 		std::cout << std::endl;
+	}
+
+	for (volatile unsigned long long warmup = 0; warmup < (1ULL << 30); warmup++);
+
+	for (unsigned char rounds = 0; rounds <= 20; rounds++)
+	{
+		unsigned long long num = 0;
+		std::chrono::time_point start = std::chrono::high_resolution_clock::now();
+		for (unsigned char M = 0; M <= rounds; M++)
+		{
+			CombinationGrowing(3, M, [&](const auto&)
+			{
+				num++;
+			});
+		}
+		std::chrono::time_point end = std::chrono::high_resolution_clock::now();
+		std::chrono::duration durationCombinationsGrowing = end - start;
+
+		num = 0;
+		start = std::chrono::high_resolution_clock::now();
+		for (unsigned char M = 0; M <= rounds; M++)
+		{
+			for (unsigned char i = 0; i <= M; i++)
+			{
+				for (unsigned char j = 0; j <= M; j++)
+				{
+					for (unsigned char k = 0; k <= M; k++)
+					{
+						if (i != M && j != M && k != M)
+							continue;
+
+						num++;
+					}
+				}
+			}
+		}
+		end = std::chrono::high_resolution_clock::now();
+		std::chrono::duration durationNaive = end - start;
+		std::cout << +rounds << "\t" << durationCombinationsGrowing.count() << "\t" << durationNaive.count() << std::endl;
 	}
 }

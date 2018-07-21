@@ -30,12 +30,14 @@ Arrays that haven't decade to their pointer type carry their length during compi
 
 ### CombinationGrowingNumber
 
-This is slightly related to GenTrees. I wanted all combinations of three different trees, each up to N number of nodes. This is a pretty simple problem (just use 3 nested for loops). However, I wanted to start with all trees of 2 nodes or less, then 3 nodes or less, then 4 nodes or less, but this would redo work. Thus I needed a way to generate combinations of numbers of size N that excludes all combinations of N - 1. A conditional check could do it `if (a != n || b != n || c != n) continue;` could suffice, but then it would be neededlessly counting.
+This is slightly related to GenTrees. I wanted all combinations of three different trees, each up to M number of nodes. This is a pretty simple problem (just use 3 nested for loops). However, I wanted to start with all trees of 2 nodes or less, then 3 nodes or less, then 4 nodes or less, but this would redo work. Thus I needed a way to generate combinations of numbers of max value M that excludes all combinations of M - 1. A conditional check could do it `if (a != M || b != M || c != M) continue;` could suffice, but then it would be neededlessly counting.
 
-While the overhead might be worse than the continue in some cases, I did want to write an algorithm that could generate the combinations. The number of calls will equal M^N - (M-1)^N, as opposed to M^N. Interstingly some of these are named sequences:
+If the number of trees is represented by N, then the number of calls will equal M^N - (M-1)^N, as opposed to M^N. Interstingly some of these are named sequences:
 
 * N = 2 - [A005408](https://oeis.org/A005408): [Gnomic numbers](http://mathworld.wolfram.com/GnomonicNumber.html) (1d): 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, ...
 * N = 3 - [A003215](https://oeis.org/A003215): [Centered hexagonal numbers](http://mathworld.wolfram.com/HexNumber.html) (2d): 1, 7, 19, 37, 61, 91, 127, 169, 217, 271, ...
 * N = 4 - [A005917](https://oeis.org/A005917): [Rhombic dodecahedral numbers](http://mathworld.wolfram.com/RhombicDodecahedralNumber.html) (3d): 1, 15, 65, 175, 369, 671, 1105, 1695, 2465, 3439, ...
 
 All of these are [Nexus Numbers](http://mathworld.wolfram.com/NexusNumber.html) which is a subclass of [Figurate Numbers](http://mathworld.wolfram.com/FigurateNumber.html).
+
+There are some slight overhead with CombinationGrowingNumber. Profiling the code shows that the overhead is quickly made irrelevant by the naive implementation. The growing aware combinator is better when N = 2, M > 18; N = 3, M > 9; N = 4; M > 7; N = 5; M > 4. In my case N (trees) is going to be 3, and since I'm piping this into GenTrees, my M is going to be small too (probably under 10). Thus for myself, it is better to do the naive solution. However, this a fun learning experience that taught me about nexus numbers.
