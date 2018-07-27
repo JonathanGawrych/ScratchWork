@@ -10,7 +10,7 @@ void RunScratch<ScratchWork::Noop>() {}
 
 int main()
 {
-	RunScratch<ScratchWork::CombinationGrowingNumber>();
+	RunScratch<ScratchWork::ComparatorTransform>();
 
 #ifdef _WIN32
 	system("pause");

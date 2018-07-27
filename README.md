@@ -42,6 +42,10 @@ All of these are [Nexus Numbers](http://mathworld.wolfram.com/NexusNumber.html) 
 
 There are some slight overhead with CombinationGrowingNumber. Profiling the code shows that the overhead is quickly made irrelevant by the naive implementation. The growing aware combinator is better when N = 2, M > 18; N = 3, M > 9; N = 4; M > 7; N = 5; M > 4. In my case N (trees) is going to be 3, and since I'm piping this into GenTrees, my M is going to be small too (probably under 10). Thus for myself, it is better to do the naive solution. However, this a fun learning experience that taught me about nexus numbers.
 
+### ComparatorTransform
+
+Given a comparator, such as `std::less`, you can generate other comparators using boolean logic. For example if a &lt; b is false, and b &lt; a is false, this means a == b. As long as you have any form of inequality (&lt;, &lt;=, &gt;=, or &gt;) you can generate another form of inequality or equality (==, or !=). ComparatorTransform takes a comparitor, and what it is suppose to represent, then transforms it to another requested type. The transform is done at compile time, so the overhead is very minimal. The test goes though all combinations and ensures that the comparator is working correctly.
+
 ### x64x86IntrinsicShim.h
 
 One might want to do 128 bit addition/multiplication. Another reason is to do a 64 bit operation and check the overflow. This is the case for [GenTrees](#gentrees), when calculating Catalan numbers, we can easily overflow. This leads to the intrinsics [_umul128](https://msdn.microsoft.com/en-us/library/3dayytw9.aspx) and [_addcarry_u64](https://software.intel.com/en-us/node/523867) avaiable in x64, but not in x86. These this shim allows x86 use, with the multiplication based off of https://stackoverflow.com/a/46924301/1248889, and _addcarry_u64 based off of [Stack Overflow Question - How to detect integer overflow?](https://stackoverflow.com/questions/199333/how-to-detect-integer-overflow)
