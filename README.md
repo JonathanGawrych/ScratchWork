@@ -41,3 +41,11 @@ If the number of trees is represented by N, then the number of calls will equal 
 All of these are [Nexus Numbers](http://mathworld.wolfram.com/NexusNumber.html) which is a subclass of [Figurate Numbers](http://mathworld.wolfram.com/FigurateNumber.html).
 
 There are some slight overhead with CombinationGrowingNumber. Profiling the code shows that the overhead is quickly made irrelevant by the naive implementation. The growing aware combinator is better when N = 2, M > 18; N = 3, M > 9; N = 4; M > 7; N = 5; M > 4. In my case N (trees) is going to be 3, and since I'm piping this into GenTrees, my M is going to be small too (probably under 10). Thus for myself, it is better to do the naive solution. However, this a fun learning experience that taught me about nexus numbers.
+
+### x64x86IntrinsicShim.h
+
+One might want to do 128 bit addition/multiplication. Another reason is to do a 64 bit operation and check the overflow. This is the case for [GenTrees](#gentrees), when calculating Catalan numbers, we can easily overflow. This leads to the intrinsics [_umul128](https://msdn.microsoft.com/en-us/library/3dayytw9.aspx) and [_addcarry_u64](https://software.intel.com/en-us/node/523867) avaiable in x64, but not in x86. These this shim allows x86 use, with the multiplication based off of https://stackoverflow.com/a/46924301/1248889, and _addcarry_u64 based off of [Stack Overflow Question - How to detect integer overflow?](https://stackoverflow.com/questions/199333/how-to-detect-integer-overflow)
+
+### FloatToHex.h
+
+You might want to get the bits of a float exactly. FloatToHex allows you to transform a floating point percision number to its equivalent sized integer. Note this isn't very portable at all, and should be avoiding for production. This is used for [NumericalLimits](numericallimits) to print out the float's special values for Infinity, Quiet NaN, and Signaling NaN.
