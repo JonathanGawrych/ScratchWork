@@ -9,7 +9,8 @@ enum class ScratchWork
 	CoincidentalLifetimeManagement,
 	CompileTimeArraySplit,
 	CombinationGrowingNumber,
-	ComparatorTransform
+	ComparatorTransform,
+	PermuteCombinations
 };
 
 // Use template specialization to do a compile time switch on which
