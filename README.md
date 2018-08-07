@@ -61,3 +61,7 @@ You might want to get the bits of a float exactly. FloatToHex allows you to tran
 ### SpecializeByNoexcept
 
 Template specialization based on the noexcept property of a function. I also wanted to see the difference between explict vs implicit noexcept specifier. Turns out implict and explict has the same result (supported by https://stackoverflow.com/a/16244397/1248889).
+
+### WhatCompiler
+
+Simply spits out what compiler this was built with and its version. Based off of [C/C++ tip: How to detect the compiler name and version using compiler predefined macros](http://nadeausoftware.com/articles/2012/10/c_c_tip_how_detect_compiler_name_and_version_using_compiler_predefined_macros).

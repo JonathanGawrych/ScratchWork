@@ -11,7 +11,8 @@ enum class ScratchWork
 	CombinationGrowingNumber,
 	ComparatorTransform,
 	PermuteCombinations,
-	SpecializeByNoexcept
+	SpecializeByNoexcept,
+	WhatCompiler
 };
 
 // Use template specialization to do a compile time switch on which
