@@ -8,7 +8,7 @@
 template<typename Lambda>
 void CombinationGrowing(unsigned char N, unsigned char M, Lambda&& lambda)
 {
-	if (N <= 0 || M < 0)
+	if (N == 0)
 		return;
 
 	if (M == 0)

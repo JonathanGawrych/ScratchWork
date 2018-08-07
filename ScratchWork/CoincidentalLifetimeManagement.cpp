@@ -99,7 +99,6 @@ void aFooAndABazWalkIntoABar()
 	fragileButWorksRValues();
 }
 
-
 struct Sonic
 {
 	Sonic(int i) : m_i(i)

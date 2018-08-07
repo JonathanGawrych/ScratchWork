@@ -1,6 +1,7 @@
 #pragma once
 #include <utility> // std::forward
 #include <functional> // std::less, std::greater, etc.
+#include <type_traits> // std::declval
 
 enum class CompartorType
 {
@@ -80,7 +81,7 @@ struct ConvertedComparator
 	ConvertedComparator(Comparator comparator) : m_comparator(comparator) { }
 
 	template<class _Ty1, class _Ty2>
-	constexpr auto operator()(_Ty1&& a, _Ty2&& b) const -> decltype(m_comparator(std::forward<_Ty1>(a), std::forward<_Ty2>(b)))
+	constexpr auto operator()(_Ty1&& a, _Ty2&& b) const -> decltype(std::declval<Comparator>()(std::forward<_Ty1>(a), std::forward<_Ty2>(b)))
 	{
 		if constexpr (To == From || To == opposite(From))
 		{

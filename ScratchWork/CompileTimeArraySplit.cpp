@@ -2,6 +2,12 @@
 
 #include <iostream>
 
+#ifdef __clang__
+	#pragma clang diagnostic push
+	#pragma clang diagnostic ignored "-Wundefined-reinterpret-cast"
+	#pragma clang diagnostic ignored "-Wold-style-cast"
+#endif
+
 // Adapted from: Using the Array Template Parameter for a Return
 // https://stackoverflow.com/a/36842111/1248889
 
@@ -105,3 +111,7 @@ void RunScratch<ScratchWork::CompileTimeArraySplit>()
 
 	printArrays(oddArr);
 }
+
+#ifdef __clang__
+	#pragma clang diagnostic pop
+#endif

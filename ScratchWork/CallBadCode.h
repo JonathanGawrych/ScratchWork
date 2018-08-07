@@ -1,18 +1,37 @@
 #pragma once
 #include <iostream>
-#include <excpt.h>
+
+#ifdef _MSC_VER
+	#include <excpt.h>
+#endif
 
 template<typename Fn>
 void callBadCodeAndIgnoreDeadlyErrorsImpl(Fn&& fn)
 {
-	__try
-	{
-		fn();
-	}
-	__except (EXCEPTION_EXECUTE_HANDLER)
-	{
-		std::cout << "Oops! Tried to do something really bad, ignoring" << std::endl;
-	}
+	// __try __except is a MSVC concept, so if we can't use it, then don't
+	#ifdef _MSC_VER
+		// disable warnings for using __try __except
+		#ifdef __clang__
+			#pragma clang diagnostic push
+			#pragma clang diagnostic ignored "-Wlanguage-extension-token"
+		#endif
+		__try
+		{
+	#endif
+
+	fn();
+
+	#ifdef _MSC_VER
+		}
+		__except (EXCEPTION_EXECUTE_HANDLER)
+		{
+			std::cout << "Oops! Tried to do something really bad, ignoring" << std::endl;
+		}
+
+		#ifdef __clang__
+			#pragma clang diagnostic pop
+		#endif
+	#endif
 }
 
 template<typename Fn>

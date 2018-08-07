@@ -10,7 +10,7 @@
 // Code based off of regular next_permutation code found here: https://stackoverflow.com/a/32695398/1248889
 // Modification based off of permutation/combination question here: https://stackoverflow.com/a/51292710/1248889
 template <typename Iterator, typename Comparator = std::less<>>
-static bool next_permutation_combination(Iterator begin, Iterator end, size_t combo_size, Comparator less_than = std::less<>())
+static bool next_permutation_combination(Iterator begin, Iterator end, typename Iterator::difference_type combo_size, Comparator less_than = std::less<>())
 {
 	static_assert(std::is_convertible<typename std::iterator_traits<Iterator>::iterator_category, std::bidirectional_iterator_tag>::value);
 
@@ -49,7 +49,7 @@ static bool next_permutation_combination(Iterator begin, Iterator end, size_t co
 
 // Using the above logic and some work of my own, writing next_combination
 template <typename Iterator, typename Comparator = std::less<>>
-static bool next_combination(Iterator begin, Iterator end, size_t combo_size, Comparator less_than = std::less<>())
+static bool next_combination(Iterator begin, Iterator end, typename Iterator::difference_type combo_size, Comparator less_than = std::less<>())
 {
 	static_assert(std::is_convertible<typename std::iterator_traits<Iterator>::iterator_category, std::bidirectional_iterator_tag>::value);
 

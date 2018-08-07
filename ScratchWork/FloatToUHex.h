@@ -1,5 +1,12 @@
 #pragma once
 
+// Warning! This fill relies on undefined behavior that is not portable!
+// Do not use unless except for diagnostic / curiosity proposes only!
+#ifdef __clang__
+	#pragma clang diagnostic push
+	#pragma clang diagnostic ignored "-Wundefined-reinterpret-cast"
+#endif
+
 template<typename FloatType>
 struct type_float_to_uhex;
 
@@ -65,3 +72,7 @@ constexpr type_uhex_to_float_t<HexType> uhex_to_float(HexType h)
 {
 	return reinterpret_cast<type_uhex_to_float_t<HexType>&>(h);
 }
+
+#ifdef __clang__
+	#pragma clang diagnostic pop
+#endif

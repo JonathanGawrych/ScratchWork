@@ -88,7 +88,9 @@ static std::vector<Tree> GenAllTrees(unsigned char numNodes)
 {
 	std::vector<Tree> trees;
 	std::stack<TreeGen> treeGenStack;
-	treeGenStack.emplace(numNodes, unsigned char(0));
+	// Due to https://stackoverflow.com/q/23202296/1248889, non-msvc does not like constructor-style casting with spaces.
+	// Thus for other platforms, change `unsigned char(0)` to `static_cast<unsigned char>(0)`
+	treeGenStack.emplace(numNodes, static_cast<unsigned char>(0));
 
 	while (!treeGenStack.empty())
 	{
