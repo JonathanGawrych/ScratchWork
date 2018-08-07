@@ -10,7 +10,7 @@ void RunScratch<ScratchWork::Noop>() {}
 
 int main()
 {
-	RunScratch<ScratchWork::WhatCompiler>();
+	RunScratch<run>();
 
 #ifdef _WIN32
 	system("pause");
