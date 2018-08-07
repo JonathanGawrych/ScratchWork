@@ -10,7 +10,8 @@ enum class ScratchWork
 	CompileTimeArraySplit,
 	CombinationGrowingNumber,
 	ComparatorTransform,
-	PermuteCombinations
+	PermuteCombinations,
+	SpecializeByNoexcept
 };
 
 // Use template specialization to do a compile time switch on which

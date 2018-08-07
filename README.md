@@ -57,3 +57,7 @@ One might want to do 128 bit addition/multiplication. Another reason is to do a 
 ### FloatToHex.h
 
 You might want to get the bits of a float exactly. FloatToHex allows you to transform a floating point percision number to its equivalent sized integer. Note this isn't very portable at all, and should be avoiding for production. This is used for [NumericalLimits](numericallimits) to print out the float's special values for Infinity, Quiet NaN, and Signaling NaN.
+
+### SpecializeByNoexcept
+
+Template specialization based on the noexcept property of a function. I also wanted to see the difference between explict vs implicit noexcept specifier. Turns out implict and explict has the same result (supported by https://stackoverflow.com/a/16244397/1248889).

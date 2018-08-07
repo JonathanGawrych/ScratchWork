@@ -130,6 +130,7 @@
     <ClCompile Include="CombinationGrowingNumber.cpp" />
     <ClCompile Include="PermuteCombinations.cpp" />
     <ClCompile Include="ComparatorTransformTests.cpp" />
+    <ClCompile Include="SpecializeByNoexcept.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FloatToUHex.h" />
