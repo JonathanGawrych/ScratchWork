@@ -134,6 +134,7 @@
     <ClCompile Include="WhatCompiler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CallBadCode.h" />
     <ClInclude Include="FloatToUHex.h" />
     <ClInclude Include="ScratchPicker.h" />
     <ClInclude Include="ComparatorTransform.h" />

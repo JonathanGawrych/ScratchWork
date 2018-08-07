@@ -4,6 +4,26 @@ Welcome to my little repository of one-off code. Whenever I get an idea and want
 
 ## C++
 
+### Header files
+
+#### ScratchPicker.h
+
+Uses template specialization to pick which of the below C++ projects should be run.
+
+#### CallBadCode.h
+
+Wraps bad code in exception handling (both regular and [SEH](https://en.wikipedia.org/wiki/Microsoft-specific_exception_handling_mechanisms) exceptions). This is to be use to demonstrate code that might/will explode.
+
+#### x64x86IntrinsicShim.h
+
+One might want to do 128 bit addition/multiplication. Another reason is to do a 64 bit operation and check the overflow. This is the case for [GenTrees](#gentrees), when calculating Catalan numbers, we can easily overflow. This leads to the intrinsics [\_umul128](https://msdn.microsoft.com/en-us/library/3dayytw9.aspx) and [\_addcarry_u64](https://software.intel.com/en-us/node/523867) avaiable in x64, but not in x86. These this shim allows x86 use, with the multiplication based off of https://stackoverflow.com/a/46924301/1248889, and \_addcarry_u64 based off of [Stack Overflow Question - How to detect integer overflow?](https://stackoverflow.com/questions/199333/how-to-detect-integer-overflow)
+
+#### FloatToHex.h
+
+You might want to get the bits of a float exactly. FloatToHex allows you to transform a floating point percision number to its equivalent sized integer. Note this isn't very portable at all, and should be avoiding for production. This is used for [NumericalLimits](numericallimits) to print out the float's special values for Infinity, Quiet NaN, and Signaling NaN.
+
+### Projects
+
 ### NumericalLimits
 
 Just a simple project that prints out C++ numerical limits for the primitive types.
@@ -49,14 +69,6 @@ Given a comparator, such as `std::less`, you can generate other comparators usin
 ### PermuteCombinations
 
 Sometimes you want permutations and combinations. [Permutations](https://en.wikipedia.org/wiki/Permutation) are the arrangement of a list in different orders (123, 132, 213, 231, 312, 321). [Combinations](https://en.wikipedia.org/wiki/Combination) are a subset of items from a set (from 123, combinations of 2: 12, 13, 23). At other times you want both permutations and combinations simultaneously of the same set (from 123, combinations of 2: 12, 21, 13, 31, 23, 32). This project demonstrates all three. It uses [Lexicographic Order](https://en.wikipedia.org/wiki/Permutation#Generation_in_lexicographic_order) in order to rearrange the elements.
-
-### x64x86IntrinsicShim.h
-
-One might want to do 128 bit addition/multiplication. Another reason is to do a 64 bit operation and check the overflow. This is the case for [GenTrees](#gentrees), when calculating Catalan numbers, we can easily overflow. This leads to the intrinsics [\_umul128](https://msdn.microsoft.com/en-us/library/3dayytw9.aspx) and [\_addcarry_u64](https://software.intel.com/en-us/node/523867) avaiable in x64, but not in x86. These this shim allows x86 use, with the multiplication based off of https://stackoverflow.com/a/46924301/1248889, and \_addcarry_u64 based off of [Stack Overflow Question - How to detect integer overflow?](https://stackoverflow.com/questions/199333/how-to-detect-integer-overflow)
-
-### FloatToHex.h
-
-You might want to get the bits of a float exactly. FloatToHex allows you to transform a floating point percision number to its equivalent sized integer. Note this isn't very portable at all, and should be avoiding for production. This is used for [NumericalLimits](numericallimits) to print out the float's special values for Infinity, Quiet NaN, and Signaling NaN.
 
 ### SpecializeByNoexcept
 

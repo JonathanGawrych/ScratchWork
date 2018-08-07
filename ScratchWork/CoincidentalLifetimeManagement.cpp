@@ -1,8 +1,8 @@
 #include "ScratchPicker.h"
+#include "CallBadCode.h"
 
 #include <memory>
 #include <iostream>
-#include <excpt.h>
 #include <thread>
 #include <chrono>
 
@@ -93,14 +93,9 @@ void fragileButWorksRValues()
 void aFooAndABazWalkIntoABar()
 {
 	fragileButWorksLValues();
-	__try
-	{
-		doesntWork();
-	}
-	__except (EXCEPTION_EXECUTE_HANDLER)
-	{
-		std::cout << "Oops! Tried to dereference pointer to bad memory, ignoring." << std::endl;
-	}
+	
+	callBadCodeAndIgnoreDeadlyErrors(doesntWork);
+
 	fragileButWorksRValues();
 }
 
