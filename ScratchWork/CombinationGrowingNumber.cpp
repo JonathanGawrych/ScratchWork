@@ -77,7 +77,7 @@ void RunScratch<ScratchWork::CombinationGrowingNumber>()
 	for (unsigned char rounds = 0; rounds <= 20; rounds++)
 	{
 		unsigned long long num = 0;
-		std::chrono::time_point start = std::chrono::high_resolution_clock::now();
+		std::chrono::steady_clock::time_point start = std::chrono::high_resolution_clock::now();
 		for (unsigned char M = 0; M <= rounds; M++)
 		{
 			CombinationGrowing(3, M, [&](const auto&)
@@ -85,8 +85,8 @@ void RunScratch<ScratchWork::CombinationGrowingNumber>()
 				num++;
 			});
 		}
-		std::chrono::time_point end = std::chrono::high_resolution_clock::now();
-		std::chrono::duration durationCombinationsGrowing = end - start;
+		std::chrono::steady_clock::time_point end = std::chrono::high_resolution_clock::now();
+		std::chrono::steady_clock::time_point::duration durationCombinationsGrowing = end - start;
 
 		num = 0;
 		start = std::chrono::high_resolution_clock::now();
@@ -107,7 +107,7 @@ void RunScratch<ScratchWork::CombinationGrowingNumber>()
 			}
 		}
 		end = std::chrono::high_resolution_clock::now();
-		std::chrono::duration durationNaive = end - start;
+		std::chrono::steady_clock::time_point::duration durationNaive = end - start;
 		std::cout << +rounds << "\t" << durationCombinationsGrowing.count() << "\t" << durationNaive.count() << std::endl;
 	}
 }

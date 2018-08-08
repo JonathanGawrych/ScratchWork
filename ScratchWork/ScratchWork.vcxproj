@@ -40,6 +40,7 @@
     <RootNamespace>ScratchWork</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
+  <Import Project="$(SolutionDir)\MSVC.Toolchain.Version.Override.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -259,6 +260,7 @@
     <ClInclude Include="x64x86IntrinsicShim.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\MSVC.Toolchain.Version.Override.props" />
     <None Include="..\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
