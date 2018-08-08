@@ -20,7 +20,7 @@ enum class ScratchWork
 template<ScratchWork work>
 void RunScratch();
 
-constexpr ScratchWork run = ScratchWork::WhatCompiler;
+constexpr ScratchWork run = ScratchWork::SpecializeByNoexcept;
 
 // Explicit instantiation declaration to let the compiler know that RunScratch<run>
 // is explicitly instantiated in another translation unit than main
