@@ -12,7 +12,9 @@ enum class ScratchWork
 	ComparatorTransform,
 	PermuteCombinations,
 	SpecializeByNoexcept,
-	WhatCompiler
+	WhatCompiler,
+	NaviTester,
+	IsSupported
 };
 
 // Use template specialization to do a compile time switch on which

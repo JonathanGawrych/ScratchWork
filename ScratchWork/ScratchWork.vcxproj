@@ -242,9 +242,11 @@
   <ItemGroup>
     <ClCompile Include="CoincidentalLifetimeManagement.cpp" />
     <ClCompile Include="CompileTimeArraySplit.cpp" />
+    <ClCompile Include="IsSupported.cpp" />
     <ClCompile Include="MSVCArmDebugCompilerCrash.cpp" />
     <ClCompile Include="GenTrees.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NaviTester.cpp" />
     <ClCompile Include="NumericalLimits.cpp" />
     <ClCompile Include="CombinationGrowingNumber.cpp" />
     <ClCompile Include="PermuteCombinations.cpp" />
@@ -255,6 +257,7 @@
   <ItemGroup>
     <ClInclude Include="CallBadCode.h" />
     <ClInclude Include="FloatToUHex.h" />
+    <ClInclude Include="Navi.h" />
     <ClInclude Include="ScratchPicker.h" />
     <ClInclude Include="ComparatorTransform.h" />
     <ClInclude Include="x64x86IntrinsicShim.h" />

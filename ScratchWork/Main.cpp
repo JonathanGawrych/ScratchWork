@@ -8,7 +8,7 @@
 template<>
 void RunScratch<ScratchWork::Noop>() {}
 
-constexpr ScratchWork run = ScratchWork::WhatCompiler;
+constexpr ScratchWork run = ScratchWork::NaviTester;
 
 // Explicit instantiation declaration to let the compiler know that RunScratch<run>
 // is explicitly instantiated in another translation unit than main

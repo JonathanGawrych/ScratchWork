@@ -7,6 +7,6 @@
 			14.12.25827
 			14.11.25503
 		-->
-		<VCToolsVersion Condition = "'$(VCToolsVersion)' == ''" >14.13.26128</VCToolsVersion>
+		<VCToolsVersion Condition = "'$(VCToolsVersion)' == ''" >14.12.25827</VCToolsVersion>
 	</PropertyGroup>
 </Project>
