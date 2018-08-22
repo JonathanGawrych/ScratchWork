@@ -37,18 +37,14 @@
 //	quux(const quux& other) noexcept = default;
 //};
 
-#if ASFSDF == 1
-#error Test
-#endif
-
 	struct Foo
 	{
 		Foo() = default;
-		Foo(Foo&&) = delete;
+		Foo(Foo&&) = default;
 		Foo(const Foo&) noexcept
 		{
 			std::cout << "Foo copy!" << std::endl;
-		};
+		}
 	};
 
 	struct Bar : Foo
@@ -57,37 +53,94 @@
 
 	struct Baz {};
 
-	template<typename Base, bool = std::is_move_constructible_v<Base>>
-	struct Detector;
-
-	template<typename Base>
-	struct Detector<Base, false /*Base is_move_constructible*/> : Base
+	template<typename T>
+	struct Detector
 	{
-		Detector(Detector&&) = delete;
+		operator T && () { throw "L"; }
+		operator T const&() { throw "R"; }
 	};
 
-	template<typename Base>
-	struct DetectorHelper : Base
+	template<>
+	void RunScratch<ScratchWork::NaviTester>()
 	{
-		//DetectorHelper(DetectorHelper&&) = default;
-		DetectorHelper(const DetectorHelper&) = delete;
-	};
-
-	template<typename Base>
-	struct Detector<Base, true /*Base is_move_constructible*/> : DetectorHelper<Base>
-	{
-		using DetectorHelper::DetectorHelper;
-	};
-
-	static_assert(!std::is_move_constructible_v<Detector<Foo>>, "Foo shouldn't be move constructible");
-	static_assert(!std::is_move_constructible_v<Detector<Bar>>, "Bar shouldn't be move constructible");
-	static_assert( std::is_move_constructible_v<Detector<Baz>>, "Baz should be move constructible");
-
-	int main()
-	{
-		Bar bar {};
-		Bar barTwo { std::move(bar) };
+		try
+		{
+			Detector<Baz> bazDetector{};
+			decltype(Baz(bazDetector)) hmmm;
+			hmmm = Baz{};
+		}
+		catch (const char* error)
+		{
+			std::cout << error << std::endl;
+		}
 	}
+
+	static_assert(std::is_constructible_v<Bar, Detector<Bar>>);
+	//static_assert(!std::is_constructible_v<Baz, Detector<Baz>>);
+
+
+
+	//template<typename T>
+	//T const& implicitConvertToT(T const&);
+
+	template<typename T>
+	struct is_detector : std::false_type {};
+
+	template<typename U>
+	struct is_detector<Detector<U>> : std::true_type {};
+
+	template<typename T>
+	constexpr bool is_detector_v = is_detector<T>::value;
+
+	template<typename T, class = std::enable_if_t<!std::is_lvalue_reference_v<T>>>
+	T&& implicitConvertToT(T&&);
+
+	template <typename T>
+	struct incomplete;
+
+	template<typename T, class = std::enable_if_t<!std::is_rvalue_reference_v<T>>>
+	incomplete<T> const& toIncomplete(T const&);
+
+	template<typename T> //, class = std::enable_if_t<!std::is_lvalue_reference_v<T>>>
+	incomplete<T>&& toIncomplete(T&&);
+
+	
+	Foo&& justFoo(Foo&&);
+	//Foo const& justFoo(const Foo&);
+
+
+	Bar&& justFoo(Bar&&);
+	//Bar const& justFoo(const Bar&);
+
+	Baz&& justFoo(Baz&&);
+	//Baz const& justFoo(const Baz&);
+
+	template<typename T, class = void>
+	struct is_really_move_constructible : std::false_type {};
+
+	template<typename T>
+	struct is_really_move_constructible<T, std::enable_if_t<std::is_rvalue_reference_v<decltype(toIncomplete<T>(Detector<T>()))>>> : std::true_type {};
+
+	template<typename T>
+	constexpr bool is_really_move_constructible_v = is_really_move_constructible<T>::value;
+
+	template<typename T>
+	constexpr bool Detector_v = std::is_move_constructible_v<T> && is_really_move_constructible_v<T>; //!std::is_const_v<decltype(justFoo(Detector<T>()))>;
+
+	//constexpr bool has_mctor = !is_constructible_v<S, M<S>>;
+
+
+	//static_assert(!Detector_v<Foo>, "Foo shouldn't be move constructible");
+	//static_assert(!Detector_v<Bar>, "Bar shouldn't be move constructible");
+	//static_assert( Detector_v<Baz>, "Baz should be move constructible");
+
+
+
+	//int main()
+	//{
+	//	Bar bar {};
+	//	Bar barTwo { std::move(bar) };
+	//}
 
 //static_assert( std::is_move_constructible_v<baz>, "baz should be move constructible");
 //static_assert(!std::is_move_constructible_v<quz>, "quz shouldn't be move constructible");
@@ -146,9 +199,9 @@
 //	ExerciseNavi<int, false /*moveConstruct*/, false /*moveAssign*/, false /*copyConstruct*/, false /*copyAssign*/, false /*valueConstruct*/, false /*defaultConstruct*/, false /*destructable*/>();
 //}
 
-template<>
-void RunScratch<ScratchWork::NaviTester>()
-{
-	//RunExercise<0b01111111>();
-	//RunExercise<0b00011111>();
-}
+//template<>
+//void RunScratch<ScratchWork::NaviTester>()
+//{
+//	//RunExercise<0b01111111>();
+//	//RunExercise<0b00011111>();
+//}

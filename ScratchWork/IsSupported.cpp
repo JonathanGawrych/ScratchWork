@@ -25,7 +25,7 @@ static typename AssociativeContainer::iterator MoveNode(typename AssociativeCont
 	std::cout << "extracting node " << std::distance(std::begin(from), iterToMove) << " (" << *iterToMove << ") and moving it to the other container" << std::endl;
 	to.insert(from.extract(iterToMove));
 #else
-	if constexpr (std::is_copy_constructible_v<AssociativeContainer::value_type>)
+	if constexpr (std::is_copy_constructible_v<typename AssociativeContainer::value_type>)
 	{
 		std::cout << "copying value at " << std::distance(std::begin(from), iterToMove) << " (" << iterToMove->value << ") and erasing it from the original container" << std::endl;
 		to.emplace(*iterToMove);
