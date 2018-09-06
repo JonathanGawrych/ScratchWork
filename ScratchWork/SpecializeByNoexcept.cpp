@@ -3,13 +3,6 @@
 #include <iostream>
 #include <string>
 
-// Using the clang LLVM for visual studio has a bug where
-// this generates the same mangled name, causing an error
-// MSVC 1911 & under doesn't see the two definitions as different
-#if (defined(_MSC_VER) && defined(__clang__)) || (defined(_MSC_VER) && _MSC_VER <= 1911)
-	#define BUGGED_COMPILER
-#endif
-
 template <typename FunctionPointerType>
 struct detectNoExcept;
 
@@ -22,7 +15,7 @@ struct detectNoExcept<Return(*)(Arguments ...)>
 	}
 };
 
-#ifndef BUGGED_COMPILER
+#if defined(__cpp_noexcept_function_type) || _HAS_NOEXCEPT_FUNCTION_TYPES
 template <typename Return, typename ... Arguments>
 struct detectNoExcept<Return(*)(Arguments ...) noexcept>
 {
@@ -42,9 +35,7 @@ struct detectNoExcept<Return(Class::*)(Arguments ...)>
 	}
 };
 
-// Using the clang LLVM for visual studio has a bug where
-// this generates the same mangled name, causing an error
-#ifndef BUGGED_COMPILER
+#if defined(__cpp_noexcept_function_type) || _HAS_NOEXCEPT_FUNCTION_TYPES
 template <typename Return, typename Class, typename ... Arguments>
 struct detectNoExcept<Return(Class::*)(Arguments ...) noexcept>
 {
@@ -73,14 +64,14 @@ void RunScratch<ScratchWork::SpecializeByNoexcept>()
 {
 	std::cout << "noexceptImplicitFalse: " << detectNoExcept<decltype(&noexceptImplicitFalse)>{}() << std::endl;
 	std::cout << "noexceptExplicitFalse: " << detectNoExcept<decltype(&noexceptExplicitFalse)>{}() << std::endl;
-#ifndef BUGGED_COMPILER
+#if defined(__cpp_noexcept_function_type) || _HAS_NOEXCEPT_FUNCTION_TYPES
 	std::cout << "noexceptImplicitTrue: " << detectNoExcept<decltype(&noexceptImplicitTrue)>{}() << std::endl;
 	std::cout << "noexceptExplicitTrue: " << detectNoExcept<decltype(&noexceptExplicitTrue)>{}() << std::endl;
 #endif
 
 	std::cout << "noexceptImplicitFalse: " << detectNoExcept<decltype(&Foo::noexceptImplicitFalse)>{}() << std::endl;
 	std::cout << "noexceptExplicitFalse: " << detectNoExcept<decltype(&Foo::noexceptExplicitFalse)>{}() << std::endl;
-#ifndef BUGGED_COMPILER
+#if defined(__cpp_noexcept_function_type) || _HAS_NOEXCEPT_FUNCTION_TYPES
 	std::cout << "noexceptImplicitTrue: " << detectNoExcept<decltype(&Foo::noexceptImplicitTrue)>{}() << std::endl;
 	std::cout << "noexceptExplicitTrue: " << detectNoExcept<decltype(&Foo::noexceptExplicitTrue)>{}() << std::endl;
 #endif
