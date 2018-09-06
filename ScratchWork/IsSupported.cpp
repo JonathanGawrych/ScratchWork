@@ -11,7 +11,7 @@
 	#define __cpp_lib_node_extract 201606
 #endif
 
-#ifndef __cpp_lib_node_extract
+#ifdef __cpp_lib_node_extract
 	#include <type_traits>
 #endif
 
@@ -21,8 +21,8 @@ template <typename AssociativeContainer>
 static typename AssociativeContainer::iterator MoveNode(typename AssociativeContainer::iterator iter, AssociativeContainer& from, AssociativeContainer& to)
 {
 	typename AssociativeContainer::iterator iterToMove = iter++;
-#ifndef __cpp_lib_node_extract
-	std::cout << "extracting node " << std::distance(std::begin(from), iterToMove) << " (" << *iterToMove << ") and moving it to the other container" << std::endl;
+#ifdef __cpp_lib_node_extract
+	std::cout << "extracting node " << std::distance(std::begin(from), iterToMove) << " (" << iterToMove->value << ") and moving it to the other container" << std::endl;
 	to.insert(from.extract(iterToMove));
 #else
 	if constexpr (std::is_copy_constructible_v<typename AssociativeContainer::value_type>)

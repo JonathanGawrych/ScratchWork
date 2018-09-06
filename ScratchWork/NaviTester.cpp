@@ -53,11 +53,10 @@
 
 	struct Baz {};
 
-	template<typename T>
 	struct Detector
 	{
-		operator T && () { throw "L"; }
-		operator T const&() { throw "R"; }
+		operator Baz const&() { throw "const ref"; }
+		operator Baz&& () { throw "rvalue"; }
 	};
 
 	template<>
@@ -65,9 +64,8 @@
 	{
 		try
 		{
-			Detector<Baz> bazDetector{};
-			decltype(Baz(bazDetector)) hmmm;
-			hmmm = Baz{};
+			Detector bazDetector{};
+			Baz hmmmBaz(bazDetector);
 		}
 		catch (const char* error)
 		{
@@ -75,7 +73,7 @@
 		}
 	}
 
-	static_assert(std::is_constructible_v<Bar, Detector<Bar>>);
+	//static_assert(std::is_constructible_v<Bar, Detector<Bar>>);
 	//static_assert(!std::is_constructible_v<Baz, Detector<Baz>>);
 
 
@@ -83,49 +81,49 @@
 	//template<typename T>
 	//T const& implicitConvertToT(T const&);
 
-	template<typename T>
-	struct is_detector : std::false_type {};
+	//template<typename T>
+	//struct is_detector : std::false_type {};
 
-	template<typename U>
-	struct is_detector<Detector<U>> : std::true_type {};
+	//template<typename U>
+	//struct is_detector<Detector<U>> : std::true_type {};
 
-	template<typename T>
-	constexpr bool is_detector_v = is_detector<T>::value;
+	//template<typename T>
+	//constexpr bool is_detector_v = is_detector<T>::value;
 
-	template<typename T, class = std::enable_if_t<!std::is_lvalue_reference_v<T>>>
-	T&& implicitConvertToT(T&&);
+	//template<typename T, class = std::enable_if_t<!std::is_lvalue_reference_v<T>>>
+	//T&& implicitConvertToT(T&&);
 
-	template <typename T>
-	struct incomplete;
+	//template <typename T>
+	//struct incomplete;
 
-	template<typename T, class = std::enable_if_t<!std::is_rvalue_reference_v<T>>>
-	incomplete<T> const& toIncomplete(T const&);
+	//template<typename T, class = std::enable_if_t<!std::is_rvalue_reference_v<T>>>
+	//incomplete<T> const& toIncomplete(T const&);
 
-	template<typename T> //, class = std::enable_if_t<!std::is_lvalue_reference_v<T>>>
-	incomplete<T>&& toIncomplete(T&&);
+	//template<typename T> //, class = std::enable_if_t<!std::is_lvalue_reference_v<T>>>
+	//incomplete<T>&& toIncomplete(T&&);
 
-	
-	Foo&& justFoo(Foo&&);
-	//Foo const& justFoo(const Foo&);
+	//
+	//Foo&& justFoo(Foo&&);
+	////Foo const& justFoo(const Foo&);
 
 
-	Bar&& justFoo(Bar&&);
-	//Bar const& justFoo(const Bar&);
+	//Bar&& justFoo(Bar&&);
+	////Bar const& justFoo(const Bar&);
 
-	Baz&& justFoo(Baz&&);
-	//Baz const& justFoo(const Baz&);
+	//Baz&& justFoo(Baz&&);
+	////Baz const& justFoo(const Baz&);
 
-	template<typename T, class = void>
-	struct is_really_move_constructible : std::false_type {};
+	//template<typename T, class = void>
+	//struct is_really_move_constructible : std::false_type {};
 
-	template<typename T>
-	struct is_really_move_constructible<T, std::enable_if_t<std::is_rvalue_reference_v<decltype(toIncomplete<T>(Detector<T>()))>>> : std::true_type {};
+	//template<typename T>
+	//struct is_really_move_constructible<T, std::enable_if_t<std::is_rvalue_reference_v<decltype(toIncomplete<T>(Detector<T>()))>>> : std::true_type {};
 
-	template<typename T>
-	constexpr bool is_really_move_constructible_v = is_really_move_constructible<T>::value;
+	//template<typename T>
+	//constexpr bool is_really_move_constructible_v = is_really_move_constructible<T>::value;
 
-	template<typename T>
-	constexpr bool Detector_v = std::is_move_constructible_v<T> && is_really_move_constructible_v<T>; //!std::is_const_v<decltype(justFoo(Detector<T>()))>;
+	//template<typename T>
+	//constexpr bool Detector_v = std::is_move_constructible_v<T> && is_really_move_constructible_v<T>; //!std::is_const_v<decltype(justFoo(Detector<T>()))>;
 
 	//constexpr bool has_mctor = !is_constructible_v<S, M<S>>;
 
