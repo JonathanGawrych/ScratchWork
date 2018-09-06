@@ -94,7 +94,7 @@ void aFooAndABazWalkIntoABar()
 {
 	fragileButWorksLValues();
 	
-	callBadCodeAndIgnoreDeadlyErrors(doesntWork);
+	CallBadCodeAndIgnoreDeadlyErrors(doesntWork);
 
 	fragileButWorksRValues();
 }

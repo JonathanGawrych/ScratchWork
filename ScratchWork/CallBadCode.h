@@ -6,7 +6,7 @@
 #endif
 
 template<typename Fn>
-void callBadCodeAndIgnoreDeadlyErrorsImpl(Fn&& fn)
+void CallBadCodeAndIgnoreDeadlyErrorsImpl(Fn&& fn)
 {
 	// __try __except is a MSVC concept, so if we can't use it, then don't
 	#ifdef _MSC_VER
@@ -35,9 +35,9 @@ void callBadCodeAndIgnoreDeadlyErrorsImpl(Fn&& fn)
 }
 
 template<typename Fn>
-void callBadCodeAndIgnoreDeadlyErrors(Fn&& fn)
+void CallBadCodeAndIgnoreDeadlyErrors(Fn&& fn)
 {
-	callBadCodeAndIgnoreDeadlyErrorsImpl([fn = std::forward<Fn>(fn)]()
+	CallBadCodeAndIgnoreDeadlyErrorsImpl([fn = std::forward<Fn>(fn)]()
 	{
 		// This extra try can hopefully catch before relying on SEH catching
 		try

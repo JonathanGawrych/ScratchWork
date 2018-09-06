@@ -12,7 +12,8 @@ enum class ScratchWork
 	ComparatorTransform,
 	PermuteCombinations,
 	SpecializeByNoexcept,
-	WhatCompiler
+	WhatCompiler,
+	MSVCCoroBadOptimizationCrash
 };
 
 // Use template specialization to do a compile time switch on which

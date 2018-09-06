@@ -173,6 +173,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalOptions>/await %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ClangDebug|x64'">
@@ -233,6 +234,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalOptions>/await %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -242,6 +244,7 @@
   <ItemGroup>
     <ClCompile Include="CoincidentalLifetimeManagement.cpp" />
     <ClCompile Include="CompileTimeArraySplit.cpp" />
+    <ClCompile Include="MSVCCoroBadOptimizationCrash.cpp" />
     <ClCompile Include="MSVCArmDebugCompilerCrash.cpp" />
     <ClCompile Include="GenTrees.cpp" />
     <ClCompile Include="Main.cpp" />

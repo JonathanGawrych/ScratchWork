@@ -77,3 +77,7 @@ Template specialization based on the noexcept property of a function. I also wan
 ### WhatCompiler
 
 Simply spits out what compiler this was built with and its version. Based off of [C/C++ tip: How to detect the compiler name and version using compiler predefined macros](http://nadeausoftware.com/articles/2012/10/c_c_tip_how_detect_compiler_name_and_version_using_compiler_predefined_macros).
+
+### MSVCCoroBadOptimizationCrash
+
+Found a bad code generation compiler issue in MSVC when you "Cancel a coroutine causing a garbage pointer to be passed to delete" when optimizations are turned on. Mitgation is to add `#pragma optimize("g", off)` to the _end_ of the file so that it targets code generation. This was fixed in 14.14.26428
